@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Aplkacja {
 
-
+// elo
     private static ListaFilmow listaFilmow = new ListaFilmow(new ArrayList<>(
             List.of(
                     new Film(1,"Kill Bill", 2003, 111,  50.00, "dobry", "Polski"),
