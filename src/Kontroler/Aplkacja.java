@@ -196,11 +196,13 @@ public class Aplkacja {
         Scanner scanner = new Scanner(System.in);
         int id, wiek, telefon;
         String imie, nazwisko, adres;
+        boolean czyKlientIstnieje = false;
         wyswietlKlientow();
         System.out.println("Podaj id: ");
         id = Integer.parseInt(scanner.nextLine());
         for (Klient klient : listaKlientow) {
             if (klient.getId() == id) {
+                czyKlientIstnieje = true;
                 System.out.println("Podaj imie: ");
                 imie = scanner.nextLine();
                 System.out.println("Podaj nazwisko: ");
@@ -217,10 +219,10 @@ public class Aplkacja {
                     System.out.println("Podano zly format danych");
                 }
                 break;
-            } else {
-                System.out.println("Nie ma klienta o takim indeksie");
-                break;
             }
+        }
+        if(!czyKlientIstnieje) {
+            System.out.println("Nie ma klienta o takim indeksie");
         }
     }
 
