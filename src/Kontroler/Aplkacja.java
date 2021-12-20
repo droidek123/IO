@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Aplkacja {
 
-// elo
     private static ListaFilmow listaFilmow = new ListaFilmow(new ArrayList<>(
             List.of(
                     new Film(1,"Kill Bill", 2003, 111,  50.00, "dobry", "Polski"),
@@ -18,7 +17,8 @@ public class Aplkacja {
                     new Film(4, "Szklana pułapka 2", 1990, 124, 65, "dobry", "Angielski"),
                     new Film(5, "Szklana pułapka 3", 1995, 128, 50, "dobry", "Polski")
             )
-    )) ;
+    ));
+
     private static ArrayList<Klient> listaKlientow = new ArrayList<>(
             List.of(
                     new Klient(1, "Andrzej", "Olszewski", 21, "Wittiga 8", 123456789),
@@ -27,7 +27,7 @@ public class Aplkacja {
     );
 
     public static void wyswietlKlientow(){
-        for(var klient : listaKlientow){
+        for(Klient klient : listaKlientow){
             System.out.println(klient.toString());
         }
     }
@@ -36,12 +36,12 @@ public class Aplkacja {
         listaKlientow.add(new Klient(id, imie, nazwisko, wiek, adres, telefon));
     }
 
-    public static void usunKlienta(int idFilmu){
-        listaKlientow.removeIf(klient -> klient.getId() == idFilmu);
+    public static void usunKlienta(int id){
+        listaKlientow.removeIf(klient -> klient.getId() == id);
     }
 
     public static void zaktualizujKlienta(int id, String imie, String nazwisko, int wiek, String adres, int telefon){
-        for(var klient : listaKlientow){
+        for(Klient klient : listaKlientow){
             if(klient.getId() == id){
                 klient.setImie(imie);
                 klient.setNazwisko(nazwisko);
@@ -62,6 +62,9 @@ public class Aplkacja {
     public static void filmMenu(){
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
+        int idFilmu, rokWydania, czasTrwania;
+        String nazwaFilmu, stan, jezyk;
+        double cena;
 
         do{
             System.out.println("================== MENU Filmów ==================\n");
@@ -82,26 +85,63 @@ public class Aplkacja {
                     break;
                 }
                 case 2:{
-                    int numerFilmu, rokWydania, czasTrwania;
-                    String nazwaFilmu, stan, jezyk;
-                    double cena;
 
-                    System.out.println("Podaj numer filmu: ");
-                    numerFilmu = Integer.parseInt(scanner.nextLine());
                     System.out.println("Podaj nazwę filmu: ");
                     nazwaFilmu = scanner.nextLine();
-                    System.out.println("Podaj rok wydania: ");
-                    rokWydania = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Podaj czas trwania: ");
-                    czasTrwania = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Podaj cenę: ");
-                    cena = Integer.parseInt(scanner.nextLine());
                     System.out.println("Podaj stan: ");
                     stan = scanner.nextLine();
                     System.out.println("Podaj jezyk: ");
                     jezyk = scanner.nextLine();
+                    try {
+                        System.out.println("Podaj rok wydania: ");
+                        rokWydania = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Podaj czas trwania [min]: ");
+                        czasTrwania = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Podaj cenę [zl]: ");
+                        cena = Integer.parseInt(scanner.nextLine());
+                        listaFilmow.dodajFilm(nazwaFilmu,rokWydania,czasTrwania,cena,stan,jezyk);
+                    }catch(NumberFormatException e){
+                        System.out.println("Podano zly format danych");
+                    }
+                    break;
+                }
+                case 3:{
+                    listaFilmow.wyswietlListeFilmow();
+                    System.out.println("Podaj id filmu do usunięcia");
+                    idFilmu = Integer.parseInt(scanner.nextLine());
+                    listaFilmow.usunFilm(idFilmu);
+                    break;
+                }
+                case 4:{
+                    listaFilmow.wyswietlListeFilmow();
+                    System.out.println("Podaj id: ");
+                    idFilmu = Integer.parseInt(scanner.nextLine());
+                    for(Film film : listaFilmow.getListaFilmow()){
+                        if(film.getNumerFilmu()==idFilmu){
+                            System.out.println("Podaj nazwę filmu: ");
+                            nazwaFilmu = scanner.nextLine();
+                            System.out.println("Podaj stan: ");
+                            stan = scanner.nextLine();
+                            System.out.println("Podaj jezyk: ");
+                            jezyk = scanner.nextLine();
+                            try {
+                                System.out.println("Podaj rok wydania: ");
+                                rokWydania = Integer.parseInt(scanner.nextLine());
+                                System.out.println("Podaj czas trwania: ");
+                                czasTrwania = Integer.parseInt(scanner.nextLine());
+                                System.out.println("Podaj cenę: ");
+                                cena = Integer.parseInt(scanner.nextLine());
 
-                    listaFilmow.dodajFilm(numerFilmu,nazwaFilmu,rokWydania,czasTrwania,cena,stan,jezyk);
+                                listaFilmow.zaktualizujFilm(idFilmu, nazwaFilmu, rokWydania, czasTrwania, cena, stan, jezyk);
+                            }catch(NumberFormatException e){
+                                System.out.println("Podano zly format danych");
+                            }
+                            break;
+                        }
+                        else{
+                            System.out.println("Nie ma filmu o takim indeksie");
+                        }
+                    }
                     break;
                 }
                 default: {
@@ -116,6 +156,7 @@ public class Aplkacja {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         int id, wiek, telefon;
+        int maxID = listaKlientow.size();
         String imie, nazwisko, adres;
 
         do {
@@ -141,47 +182,64 @@ public class Aplkacja {
                     break;
                 }
                 case 2: {
-                    System.out.println("Podaj id: ");
-                    id = Integer.parseInt(scanner.nextLine());
                     System.out.println("Podaj imie: ");
                     imie = scanner.nextLine();
                     System.out.println("Podaj nazwisko: ");
                     nazwisko = scanner.nextLine();
-                    System.out.println("Podaj wiek: ");
-                    wiek = Integer.parseInt(scanner.nextLine());
                     System.out.println("Podaj adres: ");
                     adres = scanner.nextLine();
-                    System.out.println("Podaj telefon: ");
-                    telefon = Integer.parseInt(scanner.nextLine());
-
-                    dodajKlienta(id,imie,nazwisko,wiek,adres,telefon);
+                    try {
+                        System.out.println("Podaj wiek: ");
+                        wiek = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Podaj telefon: ");
+                        telefon = Integer.parseInt(scanner.nextLine());
+                        maxID++;
+                        dodajKlienta(maxID, imie, nazwisko, wiek, adres, telefon);
+                    }catch(NumberFormatException e){
+                        System.out.println("Podano zly format danych");
+                    }
                     break;
                 }
                 case 3: {
+                    wyswietlKlientow();
                     System.out.println("Podaj id klienta do usunięcia");
                     id = Integer.parseInt(scanner.nextLine());
                     usunKlienta(id);
                     break;
                 }
                 case 4:{
+                    wyswietlKlientow();
                     System.out.println("Podaj id: ");
                     id = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Podaj imie: ");
-                    imie = scanner.nextLine();
-                    System.out.println("Podaj nazwisko: ");
-                    nazwisko = scanner.nextLine();
-                    System.out.println("Podaj wiek: ");
-                    wiek = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Podaj adres: ");
-                    adres = scanner.nextLine();
-                    System.out.println("Podaj telefon: ");
-                    telefon = Integer.parseInt(scanner.nextLine());
-
-                    zaktualizujKlienta(id,imie,nazwisko,wiek,adres,telefon);
+                    for(Klient klient : listaKlientow) {
+                        if (klient.getId() == id) {
+                            System.out.println("Podaj imie: ");
+                            imie = scanner.nextLine();
+                            System.out.println("Podaj nazwisko: ");
+                            nazwisko = scanner.nextLine();
+                            System.out.println("Podaj adres: ");
+                            adres = scanner.nextLine();
+                            try {
+                                System.out.println("Podaj wiek: ");
+                                wiek = Integer.parseInt(scanner.nextLine());
+                                System.out.println("Podaj telefon: ");
+                                telefon = Integer.parseInt(scanner.nextLine());
+                                zaktualizujKlienta(id, imie, nazwisko, wiek, adres, telefon);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Podano zly format danych");
+                            }
+                            break;
+                        }
+                        else{
+                            System.out.println("Nie ma klienta o takim indeksie");
+                            break;
+                        }
+                    }
                     break;
                 }
                 case 5:{
                     boolean czyKlientIstnieje = false;
+                    listaFilmow.wyswietlListeFilmow();
                     System.out.println("Podaj numer filmu do wypożyczenia");
                     id = Integer.parseInt(scanner.nextLine());
                     Film film = listaFilmow.przekazFilmDoWyp(id);
@@ -191,7 +249,7 @@ public class Aplkacja {
                     }
                     System.out.println("Podaj id klienta który wypożycza film");
                     id = Integer.parseInt(scanner.nextLine());
-                    for(var klient : listaKlientow){
+                    for(Klient klient : listaKlientow){
                         if(klient.getId()==id){
                             List<Wypozyczenie> temp = klient.getListaWypozyczen();
                             temp.add(new Wypozyczenie(film));
@@ -208,6 +266,7 @@ public class Aplkacja {
                 }
                 case 6:{
                     boolean czyKlientIstnieje = false;
+                    listaFilmow.wyswietlListeFilmow();
                     System.out.println("Podaj numer filmu do rezrwacji");
                     id = Integer.parseInt(scanner.nextLine());
                     Film film = listaFilmow.przekazFilmDoRez(id);
@@ -217,7 +276,7 @@ public class Aplkacja {
                     }
                     System.out.println("Podaj id klienta który rezrewuje film");
                     id = Integer.parseInt(scanner.nextLine());
-                    for(var klient : listaKlientow){
+                    for(Klient klient : listaKlientow){
                         if(klient.getId()==id){
                             List<Rezerwacja> temp = klient.getListaRezerwacje();
                             temp.add(new Rezerwacja(film));
@@ -233,17 +292,18 @@ public class Aplkacja {
                     break;
                 }
                 case 7:{
+                    wyswietlKlientow();
                     boolean czyKlientIstnieje = false;
                     System.out.println("Podaj id klienta który oddaje film");
                     id = Integer.parseInt(scanner.nextLine());
-                    for(var klient : listaKlientow){
+                    for(Klient klient : listaKlientow){
                         if(klient.getId() == id){
                             czyKlientIstnieje = true;
                             System.out.println("Podaj numer filmu do zwrotu");
                             id = Integer.parseInt(scanner.nextLine());
                             List<Wypozyczenie>temp =  klient.getListaWypozyczen();
                             int counter = 0;
-                            for(var t : temp){
+                            for(Wypozyczenie t : temp){
                                 if(t.getWypozyczonyFilm().getNumerFilmu() == id){
                                     break;
                                 }
@@ -266,17 +326,18 @@ public class Aplkacja {
                     break;
                 }
                 case 8:{
+                    wyswietlKlientow();
                     boolean czyKlientIstnieje = false;
                     System.out.println("Podaj id klienta który kończy rezerwację");
                     id = Integer.parseInt(scanner.nextLine());
-                    for(var klient : listaKlientow){
+                    for(Klient klient : listaKlientow){
                         if(klient.getId() == id){
                             czyKlientIstnieje = true;
                             System.out.println("Podaj numer filmu kończący rezerwację");
                             id = Integer.parseInt(scanner.nextLine());
                             List<Rezerwacja>temp =  klient.getListaRezerwacje();
                             int counter = 0;
-                            for(var t : temp){
+                            for(Rezerwacja t : temp){
                                 if(t.getZarezerwowanyFilm().getNumerFilmu() == id){
                                     break;
                                 }

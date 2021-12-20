@@ -88,7 +88,8 @@ public class Klient {
     @Override
     public String toString() {
         return "Klient{" +
-                "imie='" + imie + '\'' +
+                "id='" + id + '\'' +
+                ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", wiek=" + wiek +
                 ", adres='" + adres + '\'' +
