@@ -16,42 +16,20 @@ public class Klient {
 
     public int getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
-
-    public String getImie() {
-        return imie;
-    }
-
     public void setImie(String imie) {
         this.imie = imie;
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
     }
 
     public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
 
-    public int getWiek() {
-        return wiek;
-    }
-
     public void setWiek(int wiek) {
         this.wiek = wiek;
     }
 
-    public String getAdres() {
-        return adres;
-    }
-
     public void setAdres(String adres) {
         this.adres = adres;
-    }
-
-    public int getTelefon() {
-        return telefon;
     }
 
     public void setTelefon(int telefon) {

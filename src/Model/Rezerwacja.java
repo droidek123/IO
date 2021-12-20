@@ -15,26 +15,6 @@ public class Rezerwacja {
         return zarezerwowanyFilm;
     }
 
-    public void setZarezerwowanyFilm(Film zarezerwowanyFilm) {
-        this.zarezerwowanyFilm = zarezerwowanyFilm;
-    }
-
-    public LocalDateTime getDataRezerwacji() {
-        return dataRezerwacji;
-    }
-
-    public void setDataRezerwacji(LocalDateTime dataRezerwacji) {
-        this.dataRezerwacji = dataRezerwacji;
-    }
-
-    public LocalDateTime getDataUplynieciaRezerwacji() {
-        return dataUplynieciaRezerwacji;
-    }
-
-    public void setDataUplynieciaRezerwacji(LocalDateTime dataUplynieciaRezerwacji) {
-        this.dataUplynieciaRezerwacji = dataUplynieciaRezerwacji;
-    }
-
     @Override
     public String toString() {
         return "Rezerwacja{" +
