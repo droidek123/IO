@@ -21,28 +21,8 @@ public class ListaFilmow {
     private int maxID;
     public FilmComparator filmComparator;
 
-    public int getLiczbaWypozyczonychFilmow() {
-        return liczbaWypozyczonychFilmow;
-    }
-
-    public void setLiczbaWypozyczonychFilmow(int liczbaWypozyczonychFilmow) {
-        this.liczbaWypozyczonychFilmow = liczbaWypozyczonychFilmow;
-    }
-
-    public int getLiczbaZarezerwowanychFilmow() {
-        return liczbaZarezerwowanychFilmow;
-    }
-
-    public void setLiczbaZarezerwowanychFilmow(int liczbaZarezerwowanychFilmow) {
-        this.liczbaZarezerwowanychFilmow = liczbaZarezerwowanychFilmow;
-    }
-
     public List<Film> getListaFilmow() {
         return listaFilmow;
-    }
-
-    public void setListaFilmow(List<Film> listaFilmow) {
-        this.listaFilmow = listaFilmow;
     }
 
     public ListaFilmow() {

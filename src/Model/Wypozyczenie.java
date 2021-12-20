@@ -17,26 +17,6 @@ public class Wypozyczenie {
         return wypozyczonyFilm;
     }
 
-    public void setWypozyczonyFilm(Film wypozyczonyFilm) {
-        this.wypozyczonyFilm = wypozyczonyFilm;
-    }
-
-    public LocalDateTime getDataWypozyczenia() {
-        return dataWypozyczenia;
-    }
-
-    public void setDataWypozyczenia(LocalDateTime dataWypozyczenia) {
-        this.dataWypozyczenia = dataWypozyczenia;
-    }
-
-    public LocalDateTime getDataUplynieciaWypozyczenia() {
-        return dataUplynieciaWypozyczenia;
-    }
-
-    public void setDataUplynieciaWypozyczenia(LocalDateTime dataUplynieciaWypozyczenia) {
-        this.dataUplynieciaWypozyczenia = dataUplynieciaWypozyczenia;
-    }
-
     @Override
     public String toString() {
         return "Wypozyczenie{" +

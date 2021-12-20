@@ -17,10 +17,6 @@ public class Film {
         return numerFilmu;
     }
 
-    public void setNumerFilmu(int numerFilmu) {
-        this.numerFilmu = numerFilmu;
-    }
-
     public String getNazwaFilmu() {
         return nazwaFilmu;
     }
