@@ -49,10 +49,6 @@ public class Film {
         return cena;
     }
 
-    public void setCena(float cena) {
-        this.cena = cena;
-    }
-
     public String getStan() {
         return stan;
     }
