@@ -90,11 +90,13 @@ public class Aplkacja {
         int idFilmu, rokWydania, czasTrwania;
         String nazwaFilmu, stan, jezyk;
         double cena;
+        List<Film> temp;
 
         listaFilmow.wyswietlListeFilmow();
         System.out.println("Podaj id: ");
         idFilmu = Integer.parseInt(scanner.nextLine());
-        for (Film film : listaFilmow.getListaFilmow()) {
+        temp = listaFilmow.getListaFilmow();
+        for (Film film : temp) {
             if (film.getNumerFilmu() == idFilmu) {
                 czyIstnieje = true;
                 System.out.println("Podaj nazwę filmu: ");
