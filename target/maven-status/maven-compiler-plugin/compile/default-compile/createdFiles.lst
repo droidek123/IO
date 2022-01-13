@@ -1,0 +1,7 @@
+Model\Wypozyczenie.class
+Model\ListaFilmow.class
+Model\ListaFilmow$FilmComparator.class
+Model\Klient.class
+Model\Rezerwacja.class
+Kontroler\Aplkacja.class
+Model\Film.class
