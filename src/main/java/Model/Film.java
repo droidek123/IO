@@ -3,7 +3,7 @@ package Model;
 public class Film {
     private int numerFilmu;
     private String nazwaFilmu;
-    private int rokWydania; // do zmiany
+    private int rokWydania;
     private int czasTrwania;
     private double cena;
     private String stan;
