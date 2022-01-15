@@ -20,6 +20,30 @@ public class Aplkacja {
             )
     ));
 
+    public static int getMaxKlientId() {
+        return maxKlientId;
+    }
+
+    public static void setMaxKlientId(int maxKlientId) {
+        Aplkacja.maxKlientId = maxKlientId;
+    }
+
+    public static ListaFilmow getListaFilmow() {
+        return listaFilmow;
+    }
+
+    public static void setListaFilmow(ListaFilmow listaFilmow) {
+        Aplkacja.listaFilmow = listaFilmow;
+    }
+
+    public static ArrayList<Klient> getListaKlientow() {
+        return listaKlientow;
+    }
+
+    public static void setListaKlientow(ArrayList<Klient> listaKlientow) {
+        Aplkacja.listaKlientow = listaKlientow;
+    }
+
     private static ArrayList<Klient> listaKlientow = new ArrayList<>(
             List.of(
                     new Klient(1, "Andrzej", "Olszewski", 21, "Wittiga 8", 123456789),

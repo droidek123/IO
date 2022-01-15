@@ -24,6 +24,8 @@ public class Klient {
         this.nazwisko = nazwisko;
     }
 
+    public String getNazwisko() {return nazwisko;}
+
     public void setWiek(int wiek) {
         this.wiek = wiek;
     }
@@ -50,6 +52,20 @@ public class Klient {
 
     public void setListaRezerwacje(List<Rezerwacja> listaRezerwacje) {
         this.listaRezerwacje = listaRezerwacje;
+    }
+
+    public int countWyp(){
+        int counter = 0;
+        for(var wyp : listaWypozyczen)
+            counter++;
+        return counter;
+    }
+
+    public int countRez(){
+        int counter = 0;
+        for(var rez : listaRezerwacje)
+            counter++;
+        return counter;
     }
 
     public Klient(int id,String imie, String nazwisko, int wiek, String adres, int telefon) {
